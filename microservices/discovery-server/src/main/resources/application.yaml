@@ -1,0 +1,13 @@
+spring:
+    application:
+        name: discovery-server
+server:
+    port: 8761
+
+eureka:
+    client:
+        register-with-eureka: false # "Ben kendimi başka bir Eureka Server'a kaydetmeyeceğim."
+        fetch-registry: false # "Başka bir Eureka Server'dan servis listesini almayacağım."
+        service-url:
+            defaultZone: http://localhost:8761/eureka/
+
