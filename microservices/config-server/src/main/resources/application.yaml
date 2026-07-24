@@ -5,7 +5,7 @@ spring:
         config:
             server:
                 git: 
-                    uri: 
+                    uri: https://github.com/ismlfrkn/Toyota-Finans-Portal-Sistemi.git
                     default-label: main
                     search-paths: microservices/configs,microservices/configs/{application}
                     clone-on-start: true
