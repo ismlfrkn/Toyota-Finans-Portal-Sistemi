@@ -1,0 +1,14 @@
+spring:
+    application:
+        name: config-server
+    cloud:
+        config:
+            server:
+                git: 
+                    uri: 
+                    default-label: main
+                    search-paths: microservices/configs,microservices/configs/{application}
+                    clone-on-start: true
+                    force-pull: true
+server:
+    port: 8888
