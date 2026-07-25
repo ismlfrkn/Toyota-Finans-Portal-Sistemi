@@ -65,6 +65,27 @@ services:
       discovery-server:
         condition: service_healthy
 
+  market-data-service:
+    build:
+      context: ../microservices
+      dockerfile: market-data-service/Dockerfile
+    environment:
+      EUREKA_URI: http://discovery-server:8761/eureka/
+      CONFIG_SERVER_URI: http://config-server:8888
+      DB_HOST: postgres
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    ports:
+      - "9002:9002"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      config-server:
+        condition: service_healthy
+      discovery-server:
+        condition: service_healthy
+
 volumes:
   postgres-data:
   pgadmin-data:

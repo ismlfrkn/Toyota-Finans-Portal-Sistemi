@@ -1,0 +1,22 @@
+server:
+    port: 9002
+
+spring:
+    datasource:
+        url: jdbc:postgresql://${DB_HOST:localhost}:5432/${POSTGRES_DB:toyota_finans}
+        username: ${POSTGRES_USER:toyota}
+        password: ${POSTGRES_PASSWORD:toyota}
+    jpa:
+        hibernate:
+            ddl-auto: validate
+    flyway:
+        enabled: true
+
+eureka:
+    client:
+        register-with-eureka: true
+        fetch-registry: false
+        service-url:
+            defaultZone: ${EUREKA_URI:http://localhost:8761/eureka/}
+
+

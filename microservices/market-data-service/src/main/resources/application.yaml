@@ -1,0 +1,10 @@
+spring:
+    application:
+        name: market-data-service
+    profiles:
+        active: dev
+    config:
+        import: configserver:${CONFIG_SERVER_URI:http://localhost:8888}
+
+
+
