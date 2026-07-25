@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(./mvnw -q -pl gateway-server -am compile)",
+      "Bash(./mvnw.cmd -q compile)"
+    ]
+  }
+}
