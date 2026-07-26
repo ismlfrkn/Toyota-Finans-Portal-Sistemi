@@ -2,7 +2,18 @@
   "permissions": {
     "allow": [
       "Bash(./mvnw -q -pl gateway-server -am compile)",
-      "Bash(./mvnw.cmd -q compile)"
+      "Bash(./mvnw.cmd -q compile)",
+      "Bash(mkdir -p /c/Users/ismlf/Desktop/finans-portal-sistemi/microservices/market-data-service/.mvn/wrapper)",
+      "Bash(cp /c/Users/ismlf/Desktop/finans-portal-sistemi/microservices/gateway-server/.mvn/wrapper/maven-wrapper.properties /c/Users/ismlf/Desktop/finans-portal-sistemi/microservices/market-data-service/.mvn/wrapper/maven-wrapper.properties)",
+      "Bash(chmod +x /c/Users/ismlf/Desktop/finans-portal-sistemi/microservices/market-data-service/mvnw)",
+      "Bash(git restore *)",
+      "Bash(echo \"EXIT:$?\")",
+      "Bash(git push *)",
+      "Bash(./mvnw.cmd dependency:tree)",
+      "Bash(xargs cat)",
+      "Read(//c/Users/ismlf/.m2/repository/org/flywaydb/**)",
+      "Read(//c/Users/ismlf/.m2/repository/org/flywaydb/flyway-core/**)",
+      "Bash(xargs grep -A2 \"artifactId\")"
     ]
   }
 }
