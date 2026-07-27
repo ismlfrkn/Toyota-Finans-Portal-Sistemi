@@ -1,0 +1,7 @@
+CREATE TABLE users (
+    id UUID PRIMARY KEY,
+    keycloak_id VARCHAR(255) NOT NULL UNIQUE,
+    username VARCHAR(255) NOT NULL UNIQUE,
+    email VARCHAR(255) NOT NULL,
+    created_at TIMESTAMP NOT NULL
+);

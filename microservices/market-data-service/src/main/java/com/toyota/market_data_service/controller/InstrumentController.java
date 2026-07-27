@@ -1,6 +1,12 @@
 package com.toyota.market_data_service.controller;
 
+import com.toyota.market_data_service.dto.request.InstrumentCreateRequest;
+import com.toyota.market_data_service.dto.request.InstrumentUpdateRequest;
+import com.toyota.market_data_service.dto.response.InstrumentCreateResponse;
+import com.toyota.market_data_service.dto.response.InstrumentResponse;
+import com.toyota.market_data_service.dto.response.InstrumentUpdateResponse;
 import com.toyota.market_data_service.entity.Instrument;
+import com.toyota.market_data_service.mapper.InstrumentMapper;
 import com.toyota.market_data_service.service.InstrumentService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -21,30 +27,36 @@ import java.util.UUID;
 public class InstrumentController {
 
     private final InstrumentService instrumentService;
+    private final InstrumentMapper instrumentMapper;
 
-    public InstrumentController(InstrumentService instrumentService) {
+    public InstrumentController(InstrumentService instrumentService, InstrumentMapper instrumentMapper) {
         this.instrumentService = instrumentService;
+        this.instrumentMapper = instrumentMapper;
     }
 
     @GetMapping
-    public List<Instrument> findAll() {
-        return instrumentService.findAll();
+    public List<InstrumentResponse> findAll() {
+        return instrumentService.findAll().stream()
+                .map(instrumentMapper::toResponse)
+                .toList();
     }
 
     @GetMapping("/{id}")
-    public Instrument findById(@PathVariable UUID id) {
-        return instrumentService.findById(id);
+    public InstrumentResponse findById(@PathVariable UUID id) {
+        return instrumentMapper.toResponse(instrumentService.findById(id));
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Instrument create(@RequestBody Instrument instrument) {
-        return instrumentService.create(instrument);
+    public InstrumentCreateResponse create(@RequestBody InstrumentCreateRequest request) {
+        Instrument instrument = instrumentMapper.toEntity(request);
+        return instrumentMapper.toCreateResponse(instrumentService.create(instrument));
     }
 
     @PutMapping("/{id}")
-    public Instrument update(@PathVariable UUID id, @RequestBody Instrument instrument) {
-        return instrumentService.update(id, instrument);
+    public InstrumentUpdateResponse update(@PathVariable UUID id, @RequestBody InstrumentUpdateRequest request) {
+        Instrument updated = instrumentMapper.toEntity(request);
+        return instrumentMapper.toUpdateResponse(instrumentService.update(id, updated));
     }
 
     @DeleteMapping("/{id}")

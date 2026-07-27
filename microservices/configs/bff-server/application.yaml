@@ -1,0 +1,38 @@
+server:
+    port: 9000
+
+spring:
+    security:
+        oauth2:
+            client:
+                registration:
+                    keycloak:
+                        client-id: ${KEYCLOAK_BFF_CLIENT_ID:bff-client}
+                        client-secret: ${KEYCLOAK_BFF_CLIENT_SECRET}
+                        authorization-grant-type: authorization_code
+                        scope:
+                            - openid
+                            - profile
+                            - email
+                provider:
+                    keycloak:
+                        issuer-uri: ${KEYCLOAK_ISSUER_URI:http://localhost:8085/realms/finans-portal}
+
+    cloud:
+        gateway:
+            server:
+                webmvc:
+                    routes:
+                        - id: gateway-server
+                          uri: lb://gateway-server
+                          predicates:
+                              - Path=/api/**
+                          filters:
+                              - TokenRelay=
+
+eureka:
+    client:
+        register-with-eureka: true
+        fetch-registry: true
+        service-url:
+            defaultZone: ${EUREKA_URI:http://localhost:8761/eureka/}

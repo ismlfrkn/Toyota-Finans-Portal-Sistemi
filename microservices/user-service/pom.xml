@@ -10,9 +10,9 @@
 		<relativePath>../pom.xml</relativePath>
 	</parent>
 	<groupId>com.toyota</groupId>
-	<artifactId>market-data-service</artifactId>
+	<artifactId>user-service</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>market-data-service</name>
+	<name>user-service</name>
 
 	<dependencies>
 		<dependency>
